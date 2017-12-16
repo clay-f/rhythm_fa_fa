@@ -1,8 +1,8 @@
 package com.f.bigtalk.decorator;
 
-public class Pants extends  PersonDecorator{
+public class BigTrouser extends Finery {
     public void show() {
+        System.out.println("big Trouser");
         super.show();
-        System.out.println("👖");
     }
 }

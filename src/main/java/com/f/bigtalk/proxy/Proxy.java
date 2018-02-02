@@ -9,7 +9,7 @@ public class Proxy implements Subject {
     }
 
     @Override
-    public void doSometing() {
-        subject.doSometing();
+    public void doSomeThing() {
+        subject.doSomeThing();
     }
 }

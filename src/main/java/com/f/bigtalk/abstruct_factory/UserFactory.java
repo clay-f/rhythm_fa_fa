@@ -1,11 +1,12 @@
 package com.f.bigtalk.abstruct_factory;
 
-public class DataAccess {
-    private static final String db = "sqlserver";
+public class UserFactory implements AbstractUser {
+    private String userType = "sqlserver";
 
-    public static User createUser() {
+    @Override
+    public User createUser() {
         User user = null;
-        switch (db) {
+        switch (userType) {
             case "sqlserver":
                 user = new SqlServerUser();
                 break;

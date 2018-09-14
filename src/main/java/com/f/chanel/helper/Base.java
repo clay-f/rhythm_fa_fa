@@ -1,4 +1,4 @@
-package com.f.perfume.helper;
+package com.f.chanel.helper;
 
 import java.util.Arrays;
 

@@ -1,6 +1,6 @@
-package com.f.perfume.sort;
+package com.f.chanel.sort;
 
-import static com.f.perfume.helper.Base.*;
+import static com.f.chanel.helper.Base.*;
 
 public class Shell {
     public static void sort(Comparable[] a) {

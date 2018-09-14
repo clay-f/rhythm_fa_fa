@@ -1,0 +1,5 @@
+all.log
+.gradle/
+out/
+.idea/
+build/

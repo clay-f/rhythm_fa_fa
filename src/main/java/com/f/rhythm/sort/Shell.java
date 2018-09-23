@@ -1,6 +1,6 @@
-package com.f.chanel.sort;
+package com.f.rhythm.sort;
 
-import static com.f.chanel.helper.Base.*;
+import static com.f.rhythm.helper.SortHelper.*;
 
 public class Shell {
     public static void sort(Comparable[] a) {
@@ -14,7 +14,6 @@ public class Shell {
                     exch(a, j, j - h);
                 }
             }
-            show(a);
             h = h / 3;
         }
     }

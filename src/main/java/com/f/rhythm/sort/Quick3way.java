@@ -1,7 +1,7 @@
-package com.f.chanel.sort;
+package com.f.rhythm.sort;
 
-import static com.f.chanel.helper.Base.exch;
-import static com.f.chanel.helper.Base.show;
+import static com.f.rhythm.helper.SortHelper.exch;
+import static com.f.rhythm.helper.SortHelper.show;
 
 public class Quick3way {
     public static void sort(Comparable[] a, int lo, int hi) {

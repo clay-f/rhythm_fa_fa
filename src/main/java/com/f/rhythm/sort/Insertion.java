@@ -1,6 +1,6 @@
-package com.f.chanel.sort;
+package com.f.rhythm.sort;
 
-import static com.f.chanel.helper.Base.*;
+import static com.f.rhythm.helper.SortHelper.*;
 
 /**
  * 插入排序

@@ -10,6 +10,14 @@ public class Stack<T> implements Iterable<T> {
     public Stack() {
     }
 
+    public static Stack copy(Stack stack) {
+        Stack copyStack = new Stack();
+        for (Iterator iterator = stack.iterator(); iterator.hasNext(); ) {
+            copyStack.push(iterator.next());
+        }
+        return copyStack;
+    }
+
     @Override
     public Iterator<T> iterator() {
         return new StackIterator();

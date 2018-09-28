@@ -2,12 +2,17 @@ package com.f.resolved;
 
 import java.util.Objects;
 
+import static com.f.rhythm.helper.SortHelper.show;
+
 public class NodeTask {
     public static void main(String[] args) {
         Node node = new Node("a").buildNextNode("b").buildNextNode("c").buildNextNode("d").buildNextNode("e");
 
-        System.out.println(findNodeIsExists(node, "d"));
+        node.removeAfter(new Node("c"));
 
+        for (Node item = node; item != null; item=item.next) {
+            System.out.println(item.item);
+        }
     }
 
     public static void deleteLastNode(Node node) {
@@ -58,6 +63,22 @@ public class NodeTask {
             }
             node.next = new Node(s);
             return this;
+        }
+
+
+        public void removeAfter(Node node) {
+            if (node==null) return;
+            removeAfter(this, node);
+        }
+
+        private void removeAfter(Node current, Node target) {
+            if (current == null) return;
+            if (current.item.equals(target.item)) {
+                current.next = null;
+                return;
+            } else {
+                removeAfter(current.next, target);
+            }
         }
     }
 

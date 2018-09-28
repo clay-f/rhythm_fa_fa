@@ -3,3 +3,4 @@ all.log
 out/
 .idea/
 build/
+src/test/*

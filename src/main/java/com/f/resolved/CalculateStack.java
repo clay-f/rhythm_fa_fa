@@ -64,7 +64,6 @@ public class CalculateStack {
 
     }
 
-
     public static void bracketPair() {
         Stack<String> ops = new Stack<>();
         Stack<String> vals = new Stack<>();

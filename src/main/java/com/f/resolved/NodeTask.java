@@ -10,7 +10,6 @@ public class NodeTask {
 
     }
 
-
     public static void deleteLastNode(Node node) {
         if (Objects.isNull(node)) return;
         if (Objects.isNull(node.next.next)) {
@@ -19,7 +18,6 @@ public class NodeTask {
             deleteLastNode(node.next);
         }
     }
-
 
     public static void deleteIndexElement(Node node, int i) {
         if (Objects.isNull(node)) return;
@@ -34,7 +32,6 @@ public class NodeTask {
         }
     }
 
-
     public static boolean findNodeIsExists(Node node, String key) {
         if (node == null) return false;
 
@@ -45,7 +42,6 @@ public class NodeTask {
         }
     }
 
-
     public static class Node {
         String item;
         Node next;
@@ -54,7 +50,6 @@ public class NodeTask {
             this.item = item;
             next = null;
         }
-
 
         public Node buildNextNode(String s) {
             Node node = this;

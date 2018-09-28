@@ -44,7 +44,7 @@ public class StdIn {
         return line;
     }
 
-    public static char readChar() {
+    public static char  readChar() {
         try {
             scanner.useDelimiter(EMPTY_PATTERN);
             String ch = scanner.next();

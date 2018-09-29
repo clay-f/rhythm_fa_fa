@@ -2,15 +2,13 @@ package com.f.resolved;
 
 import java.util.Objects;
 
-import static com.f.rhythm.helper.SortHelper.show;
+import static com.f.rhythm.helper.SortHelper.less;
 
 public class NodeTask {
     public static void main(String[] args) {
-        Node node = new Node("a").buildNextNode("b").buildNextNode("c").buildNextNode("d").buildNextNode("e");
+        Node node = new Node("a").buildNextNode("b");
 
-        node.removeAfter(new Node("c"));
-
-        for (Node item = node; item != null; item=item.next) {
+        for (Node item = node.reverse(); item != null; item = item.next) {
             System.out.println(item.item);
         }
     }
@@ -47,6 +45,41 @@ public class NodeTask {
         }
     }
 
+    public static void insertAfter(Node target, Node second) {
+        if (target == null) return;
+        if (target.next == null) {
+            target.next = second;
+        } else {
+            insertAfter(target.next, second);
+        }
+    }
+
+    public static void remove(Node node, String key) {
+        if (node == null) return;
+        if (node.next != null && node.next.item.equals(key)) {
+            node.next = node.next.next;
+            remove(node.next, key);
+        } else {
+            remove(node.next, key);
+        }
+    }
+
+    public static String max(Node node) {
+        if (node == null) return "";
+        return max(node, "");
+    }
+
+    public static String max(Node node, String max) {
+        if (node == null) return max;
+        if (!less(node.item, max)) {
+            max = node.item;
+            return max(node.next, max);
+        } else {
+            return max(node.next, max);
+        }
+    }
+
+
     public static class Node {
         String item;
         Node next;
@@ -65,9 +98,8 @@ public class NodeTask {
             return this;
         }
 
-
         public void removeAfter(Node node) {
-            if (node==null) return;
+            if (node == null) return;
             removeAfter(this, node);
         }
 
@@ -80,6 +112,19 @@ public class NodeTask {
                 removeAfter(current.next, target);
             }
         }
+
+        public Node reverse() {
+            return reverse(this, null);
+        }
+
+        private Node reverse(Node current, Node prev) {
+            if (current == null) return prev;
+            Node next = current.next;
+            current.next = prev;
+            prev = current;
+            return reverse(next, prev);
+        }
     }
+
 
 }

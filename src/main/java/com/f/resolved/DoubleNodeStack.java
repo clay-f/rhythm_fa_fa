@@ -33,8 +33,12 @@ public class DoubleNodeStack<T> {
     public void addLast(T t) {
         DoubleNode oldLast = last;
         last = new DoubleNode(t);
-        oldLast.next = last;
-        last.prev = oldLast;
+        if (oldLast == null) {
+            first = last;
+        } else {
+            oldLast.next = last;
+            last.prev = oldLast;
+        }
     }
 
     public T removeFirst() {
@@ -98,6 +102,41 @@ public class DoubleNodeStack<T> {
             }
         } else {
             addAfter(node.next, target, newVal);
+        }
+    }
+
+    public T remove(T t) {
+        Objects.requireNonNull(t);
+        return remove(first, t);
+    }
+
+    private T remove(DoubleNode node, T t) {
+        if (node == null) return null;
+        if (node.item.equals(t)) {
+            if (node.next == null && node.prev == null) {
+                last = null;
+                DoubleNode item = node;
+                first = null;
+                return item.item;
+            } else if (node.next == null) {
+                DoubleNode prev = node.prev;
+                DoubleNode item = node;
+                prev.next = null;
+                item.prev = null;
+                last = prev;
+                return item.item;
+            } else {
+                DoubleNode prev = node.prev;
+                DoubleNode next = node.next;
+                DoubleNode item = node;
+                prev.next = next;
+                item.prev = null;
+                item.next = null;
+                next.prev = prev;
+                return item.item;
+            }
+        } else {
+            return remove(node.next, t);
         }
     }
 

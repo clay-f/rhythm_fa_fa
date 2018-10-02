@@ -3,6 +3,8 @@ package com.f.rhythm.helper;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Objects;
+import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * 工具类
@@ -53,6 +55,17 @@ public class SortHelper {
         return a.compareTo(b) < 0;
     }
 
+
+    public static <T extends Object> T[] shuffle(T[] ar) {
+        Random rnd = ThreadLocalRandom.current();
+        for (int i = ar.length - 1; i > 0; i--) {
+            Integer index = rnd.nextInt(i + 1);
+            T a = ar[index];
+            ar[index] = ar[i];
+            ar[i] = a;
+        }
+        return ar;
+    }
 
     public static void main(String[] args) {
         Integer[] a = {1, 3, 4, 5, 6, 7};

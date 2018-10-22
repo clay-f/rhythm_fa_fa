@@ -1,4 +1,4 @@
-package com.f.java8.stream.spliterator;
+package com.f.java.stream.spliterator;
 
 import java.util.Spliterator;
 import java.util.function.Consumer;

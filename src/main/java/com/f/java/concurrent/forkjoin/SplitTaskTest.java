@@ -1,4 +1,4 @@
-package com.f.java8.forkjoin;
+package com.f.java.concurrent.forkjoin;
 
 import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.ForkJoinTask;

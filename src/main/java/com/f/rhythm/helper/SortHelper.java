@@ -1,6 +1,5 @@
 package com.f.rhythm.helper;
 
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Objects;
 import java.util.Random;
@@ -10,20 +9,10 @@ import java.util.concurrent.ThreadLocalRandom;
  * 工具类
  */
 public class SortHelper {
-    public static void show(Object[] a) {
-        Objects.requireNonNull(a);
-        Arrays.stream(a).forEach(x -> {
-            System.out.printf(x.toString() + " ");
-        });
-        System.out.println();
-    }
 
     public static void show(Collection<?> a) {
         Objects.requireNonNull(a);
-        a.stream().forEach(x -> {
-            System.out.print(x + " ");
-        });
-        System.out.println();
+        a.stream().forEach(x -> System.out.print(x + " "));
     }
 
     public static void exch(Comparable[] a, int i, int j) {

@@ -1,5 +1,5 @@
-all.log
 .gradle/
 out/
 .idea/
 build/
+src/test/java/com/f/

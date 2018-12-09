@@ -26,6 +26,5 @@ public class QuickSort {
     public static void main(String[] args) {
         Integer[] a = {10, 99, 100, 20, 50, 60, 1, 2, 9, 3, 999, 128, 223, 112, 295, 385};
         sort(a, 0, a.length - 1);
-        show(a);
     }
 }

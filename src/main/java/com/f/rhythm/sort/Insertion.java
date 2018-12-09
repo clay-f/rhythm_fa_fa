@@ -16,7 +16,5 @@ public class Insertion {
 
     public static void main(String[] args) {
         Integer[] a = {8, 2, 1, 15, 90, 18, 4, 3, 99};
-        sort(a);
-        show(a);
     }
 }

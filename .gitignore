@@ -1,6 +1,6 @@
-all.log
 .gradle/
 out/
 .idea/
 build/
-src/test/*
+src/test/java/com/f/
+src/test/java/com/f/foo

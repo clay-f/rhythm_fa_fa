@@ -26,7 +26,6 @@ public class Quick3way {
     public static void main(String[] args) {
         Integer[] arr = {10, 20, 9, 8, 3};
         sort(arr, 0, arr.length - 1);
-        show(arr);
     }
 
 }

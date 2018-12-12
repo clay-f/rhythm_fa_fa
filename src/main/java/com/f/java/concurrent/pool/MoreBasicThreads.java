@@ -1,4 +1,4 @@
-package com.f.java.concurrent.thread;
+package com.f.java.concurrent.pool;
 
 public class MoreBasicThreads {
     public static void main(String[] args) {

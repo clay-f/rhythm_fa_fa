@@ -1,5 +1,7 @@
 package com.f.java.concurrent.thread;
 
+import java.util.concurrent.TimeUnit;
+
 public class LiftOff implements Runnable {
     protected int countDown = 10;
     private static int taskCount = 0;
@@ -20,7 +22,11 @@ public class LiftOff implements Runnable {
     public void run() {
         while (countDown-- > 0) {
             System.out.print(status());
-            Thread.yield();
+            try {
+                TimeUnit.SECONDS.sleep(10);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
     }
 

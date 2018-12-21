@@ -42,7 +42,6 @@ public class AtomicIntegerTest implements Runnable {
                 System.exit(0);
             }
         }
-
     }
 
 }

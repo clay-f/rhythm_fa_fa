@@ -27,7 +27,6 @@ public class BaseBounds {
 
     class Solid<T extends Dimension & HasColor & Weight> {
         T t;
-
         public Solid(T item) {
             this.t = item;
         }

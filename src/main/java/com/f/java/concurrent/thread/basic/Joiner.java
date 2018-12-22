@@ -12,9 +12,9 @@ public class Joiner extends Thread {
     @Override
     public void run() {
         try {
-            System.out.println("----" + getName() + " ---------");
+            System.err.println("----" + getName() + " ---------");
             sleeper.join();
-            System.out.println("----" + getName() + " ---------");
+            System.err.println("----" + getName() + " ---------");
         } catch (InterruptedException e) {
             System.out.println("interrupted");
         }

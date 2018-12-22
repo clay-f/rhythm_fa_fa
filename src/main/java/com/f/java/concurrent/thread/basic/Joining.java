@@ -11,14 +11,12 @@ import java.util.concurrent.TimeUnit;
  */
 public class Joining {
     public static void main(String[] args) throws InterruptedException {
-        Sleeper sleeper = new Sleeper(1500, "one");
-        Joiner joiner = new Joiner("one-joiner", sleeper);
+//        Sleeper sleeper = new Sleeper(1500, "one");
+//        Joiner joiner = new Joiner("one-joiner", sleeper);
 
         Sleeper sleeper1 = new Sleeper(1500, "two");
         Joiner interrupt_thread = new Joiner("interrupt-thread", sleeper1);
         interrupt_thread.interrupt();
-
-
 
         TimeUnit.SECONDS.sleep(10);
     }

@@ -14,7 +14,11 @@ public class DeadLockingDiningPhilosophers {
         }
 
         for (int i = 0; i < 5; i++) {
-            exec.execute(new Philosopher(sticks[i], sticks[(i+1)%5], i, ponder));
+            if (i < 5 - 1) {
+                exec.execute(new Philosopher(sticks[i], sticks[i + 1], i, ponder));
+            } else {
+                exec.execute(new Philosopher(sticks[i], sticks[i], i, ponder));
+            }
         }
 
         System.out.println("press enter to quit");

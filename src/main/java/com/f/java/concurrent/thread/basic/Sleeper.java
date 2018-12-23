@@ -14,7 +14,7 @@ public class Sleeper extends Thread {
         try {
             sleep(duration);
         } catch (InterruptedException e) {
-            System.out.println(getName() + " was interrupted " + " isInterrupted(): " + isInterrupted());
+            System.out.println(getName() + " was interrupted isInterrupted(): " + isInterrupted());
         }
         System.out.println(getName() + " has awakened");
     }

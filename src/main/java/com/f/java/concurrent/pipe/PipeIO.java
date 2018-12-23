@@ -10,7 +10,7 @@ public class PipeIO {
         var exec = Executors.newCachedThreadPool();
         exec.execute(sender);
         exec.execute(receiver);
-        TimeUnit.SECONDS.sleep(1  );
+        TimeUnit.SECONDS.sleep(1);
         exec.shutdownNow();
     }
 }

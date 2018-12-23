@@ -1,9 +1,8 @@
 plugins {
-    id 'java-library'
+    id "java"
 }
 
 version '1.0-SNAPSHOT'
-
 
 repositories {
     mavenCentral()

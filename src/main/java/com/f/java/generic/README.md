@@ -16,19 +16,32 @@ List<Integer> List  //这两种形式都将被擦除为他它们的原生类型 
 ### 边界
 > 将类型参数限制为某个类型的子集，那么你就可以使用这个类型子集来调用方法。 Java 泛型重用了 `extends` 关键字
 
-> 注意: `extends` 关键字在泛型边界上下文与普通环境下的意义是完全不同的
-
 ```java
 
  /*
     泛型会将类型参数擦除到它的第一个边界。编译器实际上会把类型参数替换为它的擦除.
     T 会被擦除到 Foo，就好像在类的声明中用 Foo 替换了 T 一样
  */
-
- public class Foo {}
+ public class Foo {
+     
+ }
     
- public class Bar<T extends Foo> {}
+ public class Bar<T extends Foo> {
+     
+ }
 ``` 
+
+> 注意: `extends` 关键字在泛型边界上下文与普通环境下的意义是完全不同的
+
+```java
+ public class Animal {
+     public void run() {}
+ }
+ 
+ public class Baz<T extends Foo> extends Animal {
+     
+ }
+```
 
 ### 通配符
 

@@ -1,4 +1,3 @@
-// Basic task cooperation.
 package com.f.java.concurrent.notify;
 
 import java.util.concurrent.*;

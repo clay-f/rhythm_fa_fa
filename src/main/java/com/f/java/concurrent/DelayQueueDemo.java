@@ -1,7 +1,8 @@
-package com.f.java.concurrent;//: concurrency/DelayQueueDemo.java
+package com.f.java.concurrent;
 
 import java.util.concurrent.*;
 import java.util.*;
+import java.util.function.Function;
 
 import static com.f.java.base.util.Print.print;
 import static com.f.java.base.util.Print.printnb;

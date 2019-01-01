@@ -5,9 +5,9 @@
 ## lambda
 > () -> expression / () -> { statements; }
 
-lambda 又三部分组成: 1. 参数列表 2. 箭头 3. lambda 方法体
+lambda 由三部分组成: 1. 参数列表 2. 箭头 3. lambda 方法体
 
- lambda 只能出现在有函数接口的地方
+lambda 只能出现在有函数接口的地方
 
 ## 函数接口
 > 若一个接口只有一个抽象方法，则这个方法叫做函数描述符，这个接口被称为函数式接口. 通常接口会被加上 `@FunctionalInterface` 标记

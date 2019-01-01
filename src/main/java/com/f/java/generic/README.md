@@ -31,14 +31,14 @@ List<Integer> List  //这两种形式都将被擦除为他它们的原生类型 
  }
 ``` 
 
-> 注意: `extends` 关键字在泛型边界上下文与普通环境下的意义是完全不同的
+> 注意: `extends` 关键字在泛型边界上下文与普通环境下的意义是完全不同的.
 
 ```java
  public class Animal {
      public void run() {}
  }
  
- public class Baz<T extends Foo> extends Animal {
+ public class Baz<T extends Foo & Comparable<? super Integer>> extends Animal {
      
  }
 ```

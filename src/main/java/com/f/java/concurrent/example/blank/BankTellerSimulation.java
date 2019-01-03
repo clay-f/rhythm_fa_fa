@@ -1,5 +1,4 @@
-package com.f.java.concurrent.example;
-// Using queues and multithreading.
+package com.f.java.concurrent.example.blank;
 // {Args: 5}
 
 import java.util.concurrent.*;
@@ -120,9 +119,9 @@ class TellerManager implements Runnable {
     private ExecutorService exec;
     private CustomerLine customers;
     private PriorityQueue<Teller> workingTellers =
-            new PriorityQueue<>();
+            new PriorityQueue<Teller>();
     private Queue<Teller> tellersDoingOtherThings =
-            new LinkedList<>();
+            new LinkedList<Teller>();
     private int adjustmentPeriod;
     private static Random rand = new Random(47);
 
@@ -208,8 +207,12 @@ public class BankTellerSimulation {
         // Manager will add and remove tellers as necessary:
         exec.execute(new TellerManager(
                 exec, customers, ADJUSTMENT_PERIOD));
-        System.out.println("Press 'Enter' to quit");
-        System.in.read();
+        if (args.length > 0) // Optional argument
+            TimeUnit.SECONDS.sleep(new Integer(args[0]));
+        else {
+            System.out.println("Press 'Enter' to quit");
+            System.in.read();
+        }
         exec.shutdownNow();
     }
 } /* Output: (Sample)

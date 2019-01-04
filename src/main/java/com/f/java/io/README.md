@@ -6,7 +6,7 @@
 * String
 * 文件
 * 管道
-* 其他数据，网络链接等
+* 其他数据，网络连接等
 
 ## InputStream & OutputStream
 ```java

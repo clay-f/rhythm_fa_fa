@@ -68,7 +68,7 @@ class Customer implements Runnable {
     private final WaitPerson waitPerson;
     // Only one course at a time can be received:
     private SynchronousQueue<Plate> placeSetting =
-            new SynchronousQueue<Plate>();
+            new SynchronousQueue<>();
 
     public Customer(WaitPerson w) {
         waitPerson = w;

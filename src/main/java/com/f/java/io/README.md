@@ -1,14 +1,14 @@
 # java IO
 > 在创建一个结果流时，通常会组合多个对象来提供所需要的功能。(装饰器模式)
 
-## 输入流种类
-* 字节数组
-* String
-* 文件
-* 管道
-* 其他数据，网络连接等
+流种类
+1. 字节数组
+2. String
+3. 文件
+4. 管道
+5. 其他数据，网络连接等
 
-## InputStream & OutputStream
+### InputStream & OutputStream
 ```java
 ByteArrayInputStream, BufferInputStream, FileInputStream, PipedINputStream, FilterInputStream
 ByteArrayOutputStream, FileOutputStream, PipedOutputStream, FilterOutputStream
@@ -36,6 +36,21 @@ FilterInputStream,FilterOutputStream| FilterReader,FilterWriter
 FileInputStream,FileOutputStream| FileReader,FileWriter
 BufferedInputStream,BufferedOutputStream | BufferedReader, BufferedWriter
 PrintStream | PrintWriter
+
+
+## java NIO
+> 通道和缓冲器. 与数据交互时，只和缓冲器交互，把缓冲器送到通道。从缓冲器中获取数据，或向缓冲器写入数据.
+  唯一直接与通道交互的缓冲器是 `ByteBuffer`, 用于以原始的字节形式或基本数据类型输出和读取数据
+
+#### 试图缓冲器
+> 通过以特定的基本数据类型的视图查看底层的 `ByteBuffer`。 对视图的修改都会映射到对 `ByteBuffer` 的修改， 依旧是储存数据的地方，可以用户支持不同种类的视图
+```java
+   var data= ByteBuffer.allocate(1);
+   data.asCharBuffer();
+   data.asIntBuffer()
+   // 把 ByteBuffer 转化为不同的视图
+```
+
 
   
 

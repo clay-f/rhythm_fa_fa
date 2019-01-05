@@ -20,6 +20,13 @@ public abstract class Decorator implements Component {
 }
 
 class ComponentA extends Decorator {
+    public ComponentA() {
+    }
+
+    public ComponentA(Component component) {
+        this.component = component;
+    }
+
     @Override
     public void operator() {
         super.operator();
@@ -28,6 +35,13 @@ class ComponentA extends Decorator {
 }
 
 class ComponentB extends Decorator {
+    public ComponentB() {
+    }
+
+    public ComponentB(Component component) {
+        this.component = component;
+    }
+
     @Override
     public void operator() {
         super.operator();
@@ -36,6 +50,13 @@ class ComponentB extends Decorator {
 }
 
 class ComponentC extends Decorator {
+    public ComponentC() {
+    }
+
+    public ComponentC(Component component) {
+        this.component = component;
+    }
+
     @Override
     public void operator() {
         super.operator();

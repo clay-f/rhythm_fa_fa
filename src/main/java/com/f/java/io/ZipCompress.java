@@ -15,9 +15,7 @@ public class ZipCompress {
     public static void main(String[] args) throws IOException {
         ZipFile zipFile = new ZipFile(srcDir);
         zipFile.stream()
-                .forEach((ZipEntry item) -> {
-                    System.out.println(item.getName());
-                });
+                .forEach((ZipEntry item) -> System.out.println(item.getName()));
     }
 
     /**

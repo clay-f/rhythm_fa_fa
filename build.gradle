@@ -2,6 +2,11 @@ plugins {
     id "java"
 }
 
+ext {
+    jacksonVersion = "2.9.8"
+    testVersion = "5.4.0-M1"
+}
+
 version '1.0-SNAPSHOT'
 
 repositories {
@@ -9,10 +14,10 @@ repositories {
 }
 
 dependencies {
-    testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.4.0-M1'
-    testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.4.0-M1'
+    testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: testVersion
+    testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: testVersion
     testCompile group: 'org.junit.platform', name: 'junit-platform-launcher', version: '1.4.0-M1'
-    compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.9.8'
-    compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.9.8'
-    compile group: 'com.fasterxml.jackson.core', name: 'jackson-annotations', version: '2.9.8'
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: jacksonVersion
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: jacksonVersion
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-annotations', version: jacksonVersion
 }

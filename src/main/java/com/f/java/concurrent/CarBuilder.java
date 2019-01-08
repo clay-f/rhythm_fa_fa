@@ -223,7 +223,7 @@ class WheelRobot extends Robot {
 
 class RobotPool {
     // Quietly prevents identical entries:
-    private Set<Robot> pool = new HashSet<Robot>();
+    private Set<Robot> pool = new HashSet<>();
 
     public synchronized void add(Robot r) {
         pool.add(r);

@@ -20,4 +20,5 @@ dependencies {
     compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: jacksonVersion
     compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: jacksonVersion
     compile group: 'com.fasterxml.jackson.core', name: 'jackson-annotations', version: jacksonVersion
+    testCompile group: 'org.mockito', name: 'mockito-core', version: '2.23.4'
 }

@@ -1,4 +1,4 @@
-package com.f.java.concurrent;//: concurrency/HorseRace.java
+package com.f.java.concurrent;
 // Using CyclicBarriers.
 
 import java.util.concurrent.*;
@@ -52,31 +52,29 @@ class Horse implements Runnable {
 
 public class HorseRace {
     static final int FINISH_LINE = 75;
-    private List<Horse> horses = new ArrayList<Horse>();
+    private List<Horse> horses = new ArrayList<>();
     private ExecutorService exec =
             Executors.newCachedThreadPool();
     private CyclicBarrier barrier;
 
     public HorseRace(int nHorses, final int pause) {
-        barrier = new CyclicBarrier(nHorses, new Runnable() {
-            public void run() {
-                StringBuilder s = new StringBuilder();
-                for (int i = 0; i < FINISH_LINE; i++)
-                    s.append("="); // The fence on the racetrack
-                print(s);
-                for (Horse horse : horses)
-                    print(horse.tracks());
-                for (Horse horse : horses)
-                    if (horse.getStrides() >= FINISH_LINE) {
-                        print(horse + "won!");
-                        exec.shutdownNow();
-                        return;
-                    }
-                try {
-                    TimeUnit.MILLISECONDS.sleep(pause);
-                } catch (InterruptedException e) {
-                    print("barrier-action sleep interrupted");
+        barrier = new CyclicBarrier(nHorses, () -> {
+            StringBuilder s = new StringBuilder();
+            for (int i = 0; i < FINISH_LINE; i++)
+                s.append("="); // The fence on the racetrack
+            print(s);
+            for (Horse horse : horses)
+                print(horse.tracks());
+            for (Horse horse : horses)
+                if (horse.getStrides() >= FINISH_LINE) {
+                    print(horse + "won!");
+                    exec.shutdownNow();
+                    return;
                 }
+            try {
+                TimeUnit.MILLISECONDS.sleep(pause);
+            } catch (InterruptedException e) {
+                print("barrier-action sleep interrupted");
             }
         });
         for (int i = 0; i < nHorses; i++) {

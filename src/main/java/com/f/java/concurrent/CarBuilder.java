@@ -8,8 +8,7 @@ import static com.f.java.base.util.Print.print;
 
 class Car {
     private final int id;
-    private boolean
-            engine = false, driveTrain = false, wheels = false;
+    private boolean engine = false, driveTrain = false, wheels = false;
 
     public Car(int idn) {
         id = idn;
@@ -175,8 +174,7 @@ abstract class Robot implements Runnable {
         print(this + " off");
     }
 
-    private synchronized void
-    powerDown() throws InterruptedException {
+    private synchronized void powerDown() throws InterruptedException {
         engage = false;
         assembler = null; // Disconnect from the Assembler
         // Put ourselves back in the available pool:
@@ -232,9 +230,7 @@ class RobotPool {
         notifyAll();
     }
 
-    public synchronized void
-    hire(Class<? extends Robot> robotType, Assembler d)
-            throws InterruptedException {
+    public synchronized void hire(Class<? extends Robot> robotType, Assembler d) throws InterruptedException {
         for (Robot r : pool)
             if (r.getClass().equals(robotType)) {
                 pool.remove(r);

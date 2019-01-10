@@ -29,7 +29,21 @@
     public class Foo {
         private static final int a = 0;
         
-        public synchronized static int getA() { return a; }
+        public synchronized static int getA() { return a; }  // 类锁
+        
+        /**
+         * clock 锁惯用用法
+         *   
+        */
+        public void getOne() {
+            Lock lock = new ReentrantLock();
+            lock.lock();
+            try{
+                // doWork
+            } finally{
+                lock.unlock();
+            }
+        }
     }
 ```
 

@@ -28,25 +28,25 @@
 
 * 类锁。每个类都有一个锁。所以使用 `syncronized` 方法可以在类的范围防止对 static 数据的并发访问。
 ```java
-    public class Foo {
-        private static final int a = 0;
-        
-        public synchronized static int getA() { return a; }  // 类锁
-        
-        /**
-         * clock 锁惯用用法
-         *   
-        */
-        public void getOne() {
-            Lock lock = new ReentrantLock();
-            lock.lock();
-            try{
-                // doWork
-            } finally{
-                lock.unlock();
-            }
+public class Foo {
+    private static final int a = 0;
+    
+    public synchronized static int getA() { return a; }  // 类锁
+    
+    /**
+     * lock 锁惯用用法
+     *   
+    */
+    public void getOne() {
+        Lock lock = new ReentrantLock();
+        lock.lock();
+        try{
+            // doWork
+        } finally{
+            lock.unlock();
         }
     }
+}
 ```
 
 > 同步规则，什么时候使用锁. 若一个变量，它可能将被另一个线程读取，或正在读取一个已经被另一个线程写过的变量，那么必须使用同步，且读写线程都必须用相同的监视器锁同步
@@ -60,6 +60,15 @@
 wait() 线程被挂起，释放对象上的锁，同时这个对象上的其他 `syncronized` 能够获取锁。
 
 notifyAll() 唤醒 wait() 恢复执行
+
+> wait, notify 等方法操作的锁属于对象的一部分。可以把 wait() 放入任何同步块中，而不用考虑这个类是继承自 thread 还是实现了 Runnable 接口。
+  wait(), notify 等方法只能在同步方法或同步块你调用。若在非同步块调用，则在运行时会抛出 `IllegalMonitorStateException`
+ 
+```java
+synchronized(x) {
+    x.notifyAll();
+}
+``` 
 
 当调用 sleep, 或 yield 并不会释放放对象锁 
 

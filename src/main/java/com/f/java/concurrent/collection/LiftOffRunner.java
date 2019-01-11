@@ -1,6 +1,6 @@
 package com.f.java.concurrent.collection;
 
-import com.f.java.concurrent.pool.LiftOff;
+import com.f.java.concurrent.example.LiftOff;
 
 import java.util.concurrent.BlockingQueue;
 

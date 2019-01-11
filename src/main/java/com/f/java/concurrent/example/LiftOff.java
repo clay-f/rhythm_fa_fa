@@ -1,4 +1,4 @@
-package com.f.java.concurrent.pool;
+package com.f.java.concurrent.example;
 
 import java.util.concurrent.TimeUnit;
 

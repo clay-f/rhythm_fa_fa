@@ -5,14 +5,18 @@ import com.f.java.base.util.Generator;
 import java.util.concurrent.*;
 import java.util.*;
 
+/**
+ * ExchangeProducer 生产一个创建很消费时间的 list, 然后将这个列表交换为 exchangeConsumer
+ *
+ * @param <T>
+ */
 class ExchangerProducer<T> implements Runnable {
     private Generator<T> generator;
     private Exchanger<List<T>> exchanger;
     private List<T> holder;
 
-    ExchangerProducer(Exchanger<List<T>> exchg,
-                      Generator<T> gen, List<T> holder) {
-        exchanger = exchg;
+    ExchangerProducer(Exchanger<List<T>> exch, Generator<T> gen, List<T> holder) {
+        exchanger = exch;
         generator = gen;
         this.holder = holder;
     }
@@ -65,13 +69,9 @@ public class ExchangerDemo {
     public static void main(String[] args) throws Exception {
         ExecutorService exec = Executors.newCachedThreadPool();
         Exchanger<List<Fat>> xc = new Exchanger<>();
-        List<Fat>
-                producerList = new CopyOnWriteArrayList<>(),
-                consumerList = new CopyOnWriteArrayList<>();
-        exec.execute(new ExchangerProducer<>(xc,
-                BasicGenerator.create(Fat.class), producerList));
-        exec.execute(
-                new ExchangerConsumer<>(xc, consumerList));
+        List<Fat> producerList = new CopyOnWriteArrayList<>(), consumerList = new CopyOnWriteArrayList<>();
+        exec.execute(new ExchangerProducer<>(xc, BasicGenerator.create(Fat.class), producerList));
+        exec.execute(new ExchangerConsumer<>(xc, consumerList));
         TimeUnit.SECONDS.sleep(delay);
         exec.shutdownNow();
     }

@@ -107,7 +107,7 @@ class WaitPerson implements Runnable {
     private final int id = counter++;
     private final Restaurant restaurant;
     BlockingQueue<Plate> filledOrders =
-            new LinkedBlockingQueue<Plate>();
+            new LinkedBlockingQueue<>();
 
     public WaitPerson(Restaurant rest) {
         restaurant = rest;
@@ -179,11 +179,11 @@ class Chef implements Runnable {
 class Restaurant implements Runnable {
     private List<WaitPerson> waitPersons =
             new ArrayList<WaitPerson>();
-    private List<Chef> chefs = new ArrayList<Chef>();
+    private List<Chef> chefs = new ArrayList<>();
     private ExecutorService exec;
     private static Random rand = new Random(47);
     BlockingQueue<Order>
-            orders = new LinkedBlockingQueue<Order>();
+            orders = new LinkedBlockingQueue<>();
 
     public Restaurant(ExecutorService e, int nWaitPersons,
                       int nChefs) {

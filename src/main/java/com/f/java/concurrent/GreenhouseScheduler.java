@@ -1,4 +1,4 @@
-package com.f.java.concurrent;//: concurrency/GreenhouseScheduler.java
+package com.f.java.concurrent;
 // Rewriting innerclasses/GreenhouseController.java
 // to use a ScheduledThreadPoolExecutor.
 // {Args: 5000}

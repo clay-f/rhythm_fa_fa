@@ -74,8 +74,7 @@ class Customer implements Runnable {
         waitPerson = w;
     }
 
-    public void
-    deliver(Plate p) throws InterruptedException {
+    public void deliver(Plate p) throws InterruptedException {
         // Only blocks if customer is still
         // eating the previous course:
         placeSetting.put(p);
@@ -106,8 +105,7 @@ class WaitPerson implements Runnable {
     private static int counter = 0;
     private final int id = counter++;
     private final Restaurant restaurant;
-    BlockingQueue<Plate> filledOrders =
-            new LinkedBlockingQueue<>();
+    BlockingQueue<Plate> filledOrders = new LinkedBlockingQueue<>();
 
     public WaitPerson(Restaurant rest) {
         restaurant = rest;
@@ -177,16 +175,13 @@ class Chef implements Runnable {
 }
 
 class Restaurant implements Runnable {
-    private List<WaitPerson> waitPersons =
-            new ArrayList<WaitPerson>();
+    private List<WaitPerson> waitPersons = new ArrayList<>();
     private List<Chef> chefs = new ArrayList<>();
     private ExecutorService exec;
     private static Random rand = new Random(47);
-    BlockingQueue<Order>
-            orders = new LinkedBlockingQueue<>();
+    BlockingQueue<Order> orders = new LinkedBlockingQueue<>();
 
-    public Restaurant(ExecutorService e, int nWaitPersons,
-                      int nChefs) {
+    public Restaurant(ExecutorService e, int nWaitPersons, int nChefs) {
         exec = e;
         for (int i = 0; i < nWaitPersons; i++) {
             WaitPerson waitPerson = new WaitPerson(this);
@@ -219,30 +214,11 @@ class Restaurant implements Runnable {
 
 public class RestaurantWithQueues {
     public static void main(String[] args) throws Exception {
-        ExecutorService exec = Executors.newCachedThreadPool();
-        Restaurant restaurant = new Restaurant(exec, 5, 2);
+        var exec = Executors.newCachedThreadPool();
+        var restaurant = new Restaurant(exec, 5, 2);
         exec.execute(restaurant);
-        if (args.length > 0) // Optional argument
-            TimeUnit.SECONDS.sleep(new Integer(args[0]));
-        else {
-            print("Press 'Enter' to quit");
-            System.in.read();
-        }
+        print("Press 'Enter' to quit");
+        System.in.read();
         exec.shutdownNow();
     }
-} /* Output: (Sample)
-WaitPerson 0 received SPRING_ROLLS delivering to Customer 1
-Customer 1 eating SPRING_ROLLS
-WaitPerson 3 received SPRING_ROLLS delivering to Customer 0
-Customer 0 eating SPRING_ROLLS
-WaitPerson 0 received BURRITO delivering to Customer 1
-Customer 1 eating BURRITO
-WaitPerson 3 received SPRING_ROLLS delivering to Customer 2
-Customer 2 eating SPRING_ROLLS
-WaitPerson 1 received SOUP delivering to Customer 3
-Customer 3 eating SOUP
-WaitPerson 3 received VINDALOO delivering to Customer 0
-Customer 0 eating VINDALOO
-WaitPerson 0 received FRUIT delivering to Customer 1
-...
-*///:~
+}

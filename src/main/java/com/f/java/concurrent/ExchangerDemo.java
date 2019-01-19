@@ -48,7 +48,9 @@ class ExchangerConsumer<T> implements Runnable {
     public void run() {
         try {
             while (!Thread.interrupted()) {
+                System.out.println("开始等待获取的值...\n当前的数量为: " + holder.size());
                 holder = exchanger.exchange(holder);
+                System.out.println("交换值完毕，当前的数量为: " + holder.size());
                 for (T x : holder) {
                     value = x; // Fetch out value
                     System.out.println(value);
@@ -72,7 +74,7 @@ public class ExchangerDemo {
         List<Fat> producerList = new CopyOnWriteArrayList<>(), consumerList = new CopyOnWriteArrayList<>();
         exec.execute(new ExchangerProducer<>(xc, BasicGenerator.create(Fat.class), producerList));
         exec.execute(new ExchangerConsumer<>(xc, consumerList));
-        TimeUnit.SECONDS.sleep(delay);
+        TimeUnit.SECONDS.sleep(1);
         exec.shutdownNow();
     }
 } /* Output: (Sample)

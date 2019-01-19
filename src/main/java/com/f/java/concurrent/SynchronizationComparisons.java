@@ -10,6 +10,7 @@ import java.util.*;
 import static com.f.java.base.util.Print.print;
 import static com.f.java.base.util.Print.printf;
 
+
 abstract class Accumulator {
     public static long cycles = 50000L;
     // Number of Modifiers and Readers during each test:
@@ -22,7 +23,7 @@ abstract class Accumulator {
     protected volatile long value = 0;
     protected long duration = 0;
     protected String id = "error";
-    protected final static int SIZE = 100000;
+    protected final static int SIZE = 10000000;
     protected static int[] preLoaded = new int[SIZE];
 
     static {

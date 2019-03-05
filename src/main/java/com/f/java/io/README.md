@@ -24,7 +24,7 @@ DataOUtputStream, BufferedOutputStream, PrintStream
 
 ### Reader & Writer
 > 字符流支持 unicode 字符集. 组合 字节流 与 字符流 适配器类 `InputStreamReader & OutputStreamReader` 把输入流转化为 字节流.
-  使用字节流与字符流的选择: 尽量使用字符流，其次字符流
+  使用字节流与字符流的选择: 尽量使用字符流，其次字节流
 
 字节流 | 字符流
 --- | ---
@@ -42,7 +42,7 @@ PrintStream | PrintWriter
 > 通道和缓冲器. 与数据交互时，只和缓冲器交互，把缓冲器送到通道。从缓冲器中获取数据，或向缓冲器写入数据.
   唯一直接与通道交互的缓冲器是 `ByteBuffer`, 用于以原始的字节形式或基本数据类型输出和读取数据
 
-#### 试图缓冲器
+#### 视图缓冲器
 > 通过以特定的基本数据类型的视图查看底层的 `ByteBuffer`。 对视图的修改都会映射到对 `ByteBuffer` 的修改， 依旧是储存数据的地方，可以用户支持不同种类的视图
 ```java
    var data= ByteBuffer.allocate(1);

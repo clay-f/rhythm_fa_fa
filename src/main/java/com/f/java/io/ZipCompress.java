@@ -65,7 +65,7 @@ public class ZipCompress {
      * 并解压压缩包文件，读取文件内容。
      *
      * @param args 多个文件名字。用来被打包为一个压缩包
-     * @throws IOException
+     * @throws IOException error
      */
     public void zipSimpleDirAndunZip(String... args) throws IOException {
 

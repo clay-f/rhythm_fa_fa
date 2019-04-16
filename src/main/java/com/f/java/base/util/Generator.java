@@ -9,7 +9,7 @@ public interface Generator<T> {
     /**
      * return random generate value
      *
-     * @return
+     * @return T
      */
     T next();
 }

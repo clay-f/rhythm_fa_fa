@@ -1,0 +1,5 @@
+netty using protobuf test
+
+1. require protobuf compiler
+2. generator java file
+3. start netty server

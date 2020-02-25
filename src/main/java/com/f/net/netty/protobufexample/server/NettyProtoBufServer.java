@@ -1,5 +1,7 @@
-package com.f.net.netty.protobufexample;
+package com.f.net.netty.protobufexample.server;
 
+import com.f.net.netty.protobufexample.AddressBookProtos;
+import com.f.net.netty.protobufexample.server.AddressBookServerHandler;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;
@@ -28,8 +30,8 @@ public class NettyProtoBufServer {
                         @Override
                         protected void initChannel(SocketChannel ch) throws Exception {
                             ch.pipeline()
-                                    .addLast(new ProtobufVarint32FrameDecoder(), new ProtobufDecoder(AddressBookProtos.Person.getDefaultInstance()),
-                                            new ProtobufVarint32LengthFieldPrepender(), new ProtobufEncoder(), new AddressBookHandler());
+                                    .addLast(new ProtobufVarint32FrameDecoder(), new ProtobufDecoder(AddressBookProtos.AddressBook.getDefaultInstance()),
+                                            new ProtobufVarint32LengthFieldPrepender(), new ProtobufEncoder(), new AddressBookServerHandler());
 
                         }
                     });

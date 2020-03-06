@@ -1,4 +1,4 @@
-package com.f.net.netty.helloexample;
+package com.f.java.nio.netty.helloexample;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;

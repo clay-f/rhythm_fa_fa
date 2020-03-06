@@ -1,4 +1,4 @@
-package com.f.net.netty.protobufexample;
+package com.f.java.nio.netty.protobufexample;
 
 import com.google.common.collect.Lists;
 
@@ -16,5 +16,9 @@ public class MockData {
                                     .setType(AddressBookProtos.Person.PhoneType.WORK).build()))
                     .build())
             .build();
+
+    public static void main(String[] args) {
+        System.out.println(ADDRESS_BOOK);
+    }
 
 }

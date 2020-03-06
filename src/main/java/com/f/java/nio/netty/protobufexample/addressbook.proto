@@ -1,7 +1,7 @@
 syntax = "proto3";
-package com.f.net.netty.helloexample;
+package com.f.java.nio.netty.protobufexample;
  
-option java_package = "com.f.net.netty.helloexample";
+option java_package = "com.f.java.nio.netty.protobufexample";
 option java_outer_classname = "AddressBookProtos";
  
 message AddressBook {

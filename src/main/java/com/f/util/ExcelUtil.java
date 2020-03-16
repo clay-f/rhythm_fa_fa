@@ -88,10 +88,10 @@ public class ExcelUtil {
      */
     public static void writeExcel(List<Map<String, String>> data, File file) {
         requireNonNull(data);
-        writeExcel(data, convertMapToList(data.get(0)), file);
+        writeExcel(data, convertMapToHeader(data.get(0)), file);
     }
 
-    private static List<String> convertMapToList(Map<String, String> map) {
+    private static List<String> convertMapToHeader(Map<String, String> map) {
         List<String> list = new ArrayList<>();
         for (Map.Entry<String, String> item : map.entrySet()) {
             list.add(item.getKey());

@@ -1,18 +1,25 @@
 package com.f.util;
 
-import com.google.common.collect.Lists;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-import java.io.*;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.*;
 
-import static java.util.Objects.isNull;
 import static java.util.Objects.requireNonNull;
 
 public class ExcelUtil {
+    /**
+     * 读取excel文件，返回 list.
+     *
+     * @param excelFile excel file
+     * @return list
+     */
     public static List<Map<String, String>> readExcelAsMap(File excelFile) {
         List<Map<String, String>> resultListMap = new ArrayList<>();
         try (XSSFWorkbook xssfWorkbook = new XSSFWorkbook(excelFile)) {
@@ -73,19 +80,32 @@ public class ExcelUtil {
         return rowMap;
     }
 
+    /**
+     * 把 list 写入 excel.
+     *
+     * @param data list
+     * @param file
+     */
     public static void writeExcel(List<Map<String, String>> data, File file) {
         requireNonNull(data);
         writeExcel(data, convertMapToList(data.get(0)), file);
     }
 
     private static List<String> convertMapToList(Map<String, String> map) {
-        List<String> list = Lists.newArrayList();
+        List<String> list = new ArrayList<>();
         for (Map.Entry<String, String> item : map.entrySet()) {
             list.add(item.getKey());
         }
         return list;
     }
 
+    /**
+     * 以 header 为头，data 为数据写入 excel.
+     *
+     * @param data
+     * @param header excel head
+     * @param file
+     */
     public static void writeExcel(List<Map<String, String>> data, List<String> header, File file) {
         requireNonNull(data);
         requireNonNull(header);

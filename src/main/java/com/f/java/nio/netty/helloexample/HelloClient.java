@@ -24,7 +24,7 @@ public class HelloClient {
                     .handler(new ChannelInitializer<NioSocketChannel>() {
                         @Override
                         protected void initChannel(NioSocketChannel ch) throws Exception {
-                            ch.pipeline().addLast(new LoggingHandler(LogLevel.INFO),
+                            ch.pipeline().addLast(
                                     new IdleStateHandler(0l, 0l, 5l, TimeUnit.SECONDS),
                                     new HeartHandler());
                         }

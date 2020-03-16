@@ -22,4 +22,16 @@ public class HelloWorldHandler extends ChannelInboundHandlerAdapter {
             ReferenceCountUtil.release(in);
         }
     }
+
+    @Override
+    public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
+        logger.info("信息读取异常");
+        super.exceptionCaught(ctx, cause);
+    }
+
+    @Override
+    public void channelReadComplete(ChannelHandlerContext ctx) throws Exception {
+        logger.info("信息读取完成");
+        super.channelReadComplete(ctx);
+    }
 }

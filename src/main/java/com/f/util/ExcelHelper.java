@@ -13,7 +13,7 @@ import java.util.*;
 
 import static java.util.Objects.requireNonNull;
 
-public class ExcelUtil {
+public class ExcelHelper {
     /**
      * 读取excel文件，返回 list.
      *

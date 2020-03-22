@@ -12,7 +12,7 @@ import java.util.Map;
 
 import static java.util.Objects.requireNonNull;
 
-public class CSVUtil {
+public class CSVHelper {
     public static void writeCVS(List<Map<String, String>> data, File file) {
         requireNonNull(data);
         try (CSVPrinter csvPrinter = CSVFormat.DEFAULT.EXCEL.withHeader(data.get(0).keySet().toArray(new String[0])).print(file, StandardCharsets.UTF_8)) {
@@ -31,7 +31,7 @@ public class CSVUtil {
             for (String currentValue : row.values()) {
                 valueArray[valueIndex++] = currentValue;
             }
-            csvPrinter.printRecord(valueArray);
+//            csvPrinter.printRecord(valueArray);
         }
     }
 }

@@ -3,8 +3,8 @@ package com.f.util;
 import java.util.ArrayList;
 import java.util.List;
 
-public class XMLUtil {
-    private XMLUtil() {
+public class XMLHelper {
+    private XMLHelper() {
     }
 
     public static String getUniqueNodeContent(String iXmlContent, String iTagName) {

@@ -6,13 +6,13 @@
     <Appenders>
         <Console name="Console" target="SYSTEM_OUT">
             <PatternLayout
-                    pattern="%style{%d{ISO8601}} %highlight{%-5level }[%style{%t}{bright,blue}] %style{%C{1.}}{bright,yellow}: %msg%n%throwable"/>
+                    pattern="%style{%d{ISO8601}} %highlight{%-5level }[%style{%t}{bright,blue}] %style{%C{1.}}{bright,yellow} : %msg%n%throwable"/>
         </Console>
         <RollingFile name="RollFileAppender" filename="${logfile}" append="false"
                      immediateFlush="false"
                      filePattern="logs/application-%d{yyyy-MM-dd}-%i.log.xz">
             <PatternLayout
-                    pattern="%d{ISO8601} %-5p [%t] %c{1.}: %m%n%throwable"/>
+                    pattern="%d{ISO8601} %-5p [%t] %c{1.} : %m%n%throwable"/>
             <Policies>
                 <TimeBasedTriggeringPolicy modulate="true"/>
             </Policies>

@@ -70,11 +70,8 @@ public class ExcelHelper {
         List<List<String>> result = Lists.newArrayList();
         try (Workbook workbook = WorkbookFactory.create(file)) {
             Sheet sheet = workbook.getSheetAt(0);
-            Row row;
-            for (Row item : sheet) {
-                row = item;
-                result.add(readRow(row));
-            }
+            for (Row item : sheet)
+                result.add(readRow(item));
         } catch (InvalidFormatException | IOException e) {
             e.printStackTrace();
         }

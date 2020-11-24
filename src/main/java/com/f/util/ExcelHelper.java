@@ -14,6 +14,7 @@ import java.util.*;
 import static java.util.Objects.requireNonNull;
 
 public class ExcelHelper {
+    private static final String DEFAULT_WIN_FONT = "Microsoft YaHei UI";
     /**
      * 读取excel文件，返回 list.
      *
@@ -52,32 +53,65 @@ public class ExcelHelper {
     private static Map<String, String> convertRowToMap(Map<Integer, String> columnMap, Row row) {
         Map<String, String> rowMap = new HashMap<>();
         for (Iterator<Cell> cellIterator = row.cellIterator(); cellIterator.hasNext(); ) {
-            Cell cell = cellIterator.next();
-            String cellValue = null;
-            switch (cell.getCellType()) {
-                case STRING:
-                    cellValue = cell.getStringCellValue();
-                    break;
-                case FORMULA:
-                    cellValue = cell.getCellFormula();
-                    break;
-                case NUMERIC:
-                    if (DateUtil.isCellDateFormatted(cell)) {
-                        cellValue = cell.getDateCellValue().toString();
-                    } else {
-                        cellValue = Double.toString(cell.getNumericCellValue());
-                    }
-                    break;
-                case BLANK:
-                    cellValue = "";
-                    break;
-                case BOOLEAN:
-                    cellValue = Boolean.toString(cell.getBooleanCellValue());
-                    break;
-            }
-            rowMap.put(columnMap.get(cell.getColumnIndex()), cellValue);
+            Cell cell = cellIterator.next(); 
+            rowMap.put(columnMap.get(cell.getColumnIndex()), readCellValue(cell));
         }
         return rowMap;
+    }
+    
+    /**
+     * 读取 excel 文件为 list
+     * <p>
+     *
+     * @param file excel 文件
+     * @return list
+    */
+    public static List<List<String>> readExcel(File file) {
+        List<List<String>> result = Lists.newArrayList();
+        try (Workbook workbook = WorkbookFactory.create(file)) {
+            Sheet sheet = workbook.getSheetAt(0);
+            Row row;
+            for (Row item : sheet) {
+                row = item;
+                result.add(readRow(row));
+            }
+        } catch (InvalidFormatException | IOException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+    
+    private static List<String> readRow(Row row) {
+        List<String> rowVal = new ArrayList<>();
+        for (Cell item : row)
+            rowVal.add(readCellValue(item));
+        return rowVal;
+    }
+    
+    private String readCellValue(Cell cell) {
+        String cellValue = null;
+       switch (cell.getCellType()) {
+            case STRING:
+                cellValue = cell.getStringCellValue();
+                break;
+            case FORMULA:
+                cellValue = cell.getCellFormula();
+                break;
+            case NUMERIC:
+                if (DateUtil.isCellDateFormatted(cell)) {
+                    cellValue = cell.getDateCellValue().toString();
+                } else {
+                    cellValue = Double.toString(cell.getNumericCellValue());
+                }
+                break;
+            case BLANK:
+                cellValue = "";
+                break;
+            case BOOLEAN:
+                cellValue = Boolean.toString(cell.getBooleanCellValue());
+                break;
+        }
+        return cellValue;
     }
 
     /**
@@ -150,4 +184,42 @@ public class ExcelHelper {
             }
         }
     }
+    
+    public static void writeExcelWithWinFont(File file, List<List<String>> data) {
+        writeExcel(file, data, DEFAULT_WIN_FONT);
+    }
+
+
+    private static void writeExcel(File file, List<List<String>> data, String fontName) {
+        Workbook workbook = new XSSFWorkbook();
+        CreationHelper creationHelper = workbook.getCreationHelper();
+        Sheet sheet = workbook.createSheet();
+        Font font = workbook.createFont();
+        font.setFontName(fontName);
+        font.setFontHeightInPoints((short) 12);
+        CellStyle cellStyle = workbook.createCellStyle();
+        cellStyle.setFont(font);
+        try (BufferedOutputStream outputStream = new BufferedOutputStream(new FileOutputStream(file))) {
+            writeBody(data, sheet, cellStyle, creationHelper);
+            workbook.write(outputStream);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void writeBody(List<List<String>> data, Sheet sheet, CellStyle cellStyle, CreationHelper creationHelper) {
+        Cell cell;
+        Row row;
+        List<String> rowVal;
+        for (int i = 0; i < data.size(); i++) {
+            row = sheet.createRow(i);
+            rowVal = data.get(i);
+            for (int j = 0; j < rowVal.size(); j++) {
+                cell = row.createCell(j);
+                cell.setCellStyle(cellStyle);
+                cell.setCellValue(creationHelper.createRichTextString(rowVal.get(j)));
+            }
+        }
+    }
+    
 }

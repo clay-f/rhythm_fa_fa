@@ -19,7 +19,7 @@ import static java.util.Objects.requireNonNull;
  * created by f at 2020-12-19 13:34
  */
 public class ExcelHelper {
-    public static final String  DEFAULT_FONT = "Mac OS X".equals(System.getProperty("os.name")) ? "SFNSMono" : "Microsoft YaHei UI";
+    public static final String DEFAULT_FONT = "Mac OS X".equals(System.getProperty("os.name")) ? "SFNSMono" : "Microsoft YaHei UI";
 
     /**
      * 读取excel文件，返回 list.

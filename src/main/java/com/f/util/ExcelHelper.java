@@ -1,14 +1,17 @@
 package com.f.util;
 
-import com.google.common.collect.Lists;
+import com.f.util.excel.download.DownloadExcel;
+import com.f.util.excel.download.DownloadExcelWriteList;
+import com.f.util.excel.download.DownloadExcelWriteListMap;
+import com.f.util.excel.upload.ReadUploadExcel;
 import jakarta.servlet.http.HttpServletResponse;
-import org.apache.commons.lang3.tuple.Pair;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import java.io.*;
+import java.security.InvalidParameterException;
 import java.util.*;
 
 import static java.util.Objects.requireNonNull;
@@ -84,15 +87,18 @@ public class ExcelHelper {
      * @return list
      */
     public static List<List<String>> readExcelAsList(File file) {
-        List<List<String>> result = Lists.newArrayList();
+        List<List<String>> result = new ArrayList<>();
         try (Workbook workbook = WorkbookFactory.create(file)) {
-            Sheet sheet = workbook.getSheetAt(0);
-            for (Row item : sheet)
-                result.add(readRow(item));
+            readSheet(workbook.getSheetAt(0), result);
         } catch (IOException e) {
             e.printStackTrace();
         }
         return result;
+    }
+
+    public static void readSheet(Sheet sheet, List<List<String>> result) {
+        for (Row item : sheet)
+            result.add(readRow(item));
     }
 
     private static List<String> readRow(Row row) {
@@ -181,7 +187,7 @@ public class ExcelHelper {
         return cellStyle;
     }
 
-    private static void writeHeader(List<String> header, Row row, CreationHelper creationHelper, CellStyle cellStyle) {
+    public static void writeHeader(List<String> header, Row row, CreationHelper creationHelper, CellStyle cellStyle) {
         Cell cell;
         for (int i = 0; i < header.size(); i++) {
             cell = row.createCell(i);
@@ -190,7 +196,7 @@ public class ExcelHelper {
         }
     }
 
-    private static void writeBody(List<Map<String, String>> data, List<String> headers, int currentRow, Sheet sheet, CreationHelper creationHelper, CellStyle cellStyle) {
+    public static void writeBody(List<Map<String, String>> data, List<String> headers, int currentRow, Sheet sheet, CreationHelper creationHelper, CellStyle cellStyle) {
         Cell cell;
         Row row;
         Map<String, String> rowVal;
@@ -212,7 +218,7 @@ public class ExcelHelper {
      * @param file excel
      * @param data 数据data
      */
-    private static void writeExcelWithList(File file, List<List<String>> data) {
+    public static void writeExcelWithList(File file, List<List<String>> data) {
         Workbook workbook = new XSSFWorkbook();
         CreationHelper creationHelper = workbook.getCreationHelper();
         Sheet sheet = workbook.createSheet();
@@ -225,7 +231,7 @@ public class ExcelHelper {
         }
     }
 
-    private static void writeBody(List<List<String>> data, Sheet sheet, int curRowNum, CellStyle cellStyle, CreationHelper creationHelper) {
+    public static void writeBody(List<List<String>> data, Sheet sheet, int curRowNum, CellStyle cellStyle, CreationHelper creationHelper) {
         Cell cell;
         Row row;
         List<String> rowVal;
@@ -271,7 +277,7 @@ public class ExcelHelper {
      * @param <H>      表头类型
      * @param <D>      内容类型
      */
-    public static <T extends WriteServletRequestExcel, H, D> void writeHttpServletRequestExcel(T t, List<H> headers, List<D> data, HttpServletResponse response) {
+    public static <T extends DownloadExcel, H, D> void writeDownloadExcel(T t, List<H> headers, List<D> data, HttpServletResponse response) {
         Workbook workbook = new XSSFWorkbook();
         CellStyle cellStyle = getCellStyleConfig(workbook);
         CreationHelper creationHelper = workbook.getCreationHelper();
@@ -280,12 +286,12 @@ public class ExcelHelper {
         response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
         response.addHeader("content-disposition", "attachment; filename=data.xlsx");
         try (OutputStream outputStream = response.getOutputStream()) {
-            if (t instanceof WriteServletRequestExcelListData) {
-                ((WriteServletRequestExcelListData<D>) t).writeBody(sheet, data, sheet.getLastRowNum(), cellStyle, creationHelper);
-            } else if (t instanceof WriteServletRequestExcelWithHeader) {
-                ((WriteServletRequestExcelWithHeader<H, D>) t).writeHeader(headers, sheet, cellStyle, creationHelper);
+            if (t instanceof DownloadExcelWriteList) {
+                ((DownloadExcelWriteList<D>) t).writeBody(sheet, data, sheet.getLastRowNum(), cellStyle, creationHelper);
+            } else if (t instanceof DownloadExcelWriteListMap) {
+                ((DownloadExcelWriteListMap<H, D>) t).writeHeader(headers, sheet, cellStyle, creationHelper);
                 //表头占用了一行，所以写内容的时候要+1
-                ((WriteServletRequestExcelWithHeader<H, D>) t).writeBody(headers, data, sheet.getLastRowNum() + 1, sheet, cellStyle, creationHelper);
+                ((DownloadExcelWriteListMap<H, D>) t).writeBody(headers, data, sheet.getLastRowNum() + 1, sheet, cellStyle, creationHelper);
             }
             workbook.write(outputStream);
         } catch (IOException e) {
@@ -293,53 +299,23 @@ public class ExcelHelper {
         }
     }
 
-    public interface WriteServletRequestExcel {
-    }
-
-    public interface WriteServletRequestExcelListData<D> extends WriteServletRequestExcel {
-        void writeBody(Sheet sheet, List<D> data, int curRowNum, CellStyle cellStyle, CreationHelper creationHelper);
-    }
-
-    public interface WriteServletRequestExcelWithHeader<H, D> extends WriteServletRequestExcel {
-        void writeHeader(List<H> data, Sheet sheet, CellStyle cellStyle, CreationHelper creationHelper);
-
-        void writeBody(List<H> header, List<D> data, int curRowNum, Sheet sheet, CellStyle cellStyle, CreationHelper creationHelper);
-    }
-
-
     /**
-     * 将所有数据写入excel。不写入表头
-     */
-    public static class WriteServletRequestExcelListImpl implements WriteServletRequestExcelListData<List<String>> {
-        @Override
-        public void writeBody(Sheet sheet, List<List<String>> data, int curRowNum, CellStyle cellStyle, CreationHelper creationHelper) {
-            ExcelHelper.writeBody(data, sheet, curRowNum, cellStyle, creationHelper);
-        }
-    }
-
-    /**
-     * 表头的顺序与内容无关，表头有一个key，在内容里面用户get value
-     * 例如: 表头name, age，内容 getKey(name), getKey(age)
+     * 读取上传excel文件。
      * <p>
-     * <p>
-     * Pair left为key，用于从data获取数据，value用于写入excel作为表头
+     * 获取文件输入流，使用不同的读取实现类获取不同的数据
+     *
+     * @param t           读取文件实例
+     * @param inputStream 输入流
+     * @param <T>         读取文件类型
+     * @param <R>         返回值类型
+     * @return R
      */
-    public static class WriteServletRequestExcelWithKeyAsHeaderImpl implements WriteServletRequestExcelWithHeader<Pair<String, String>, Map<String, String>> {
-        @Override
-        public void writeHeader(List<Pair<String, String>> data, Sheet sheet, CellStyle cellStyle, CreationHelper creationHelper) {
-            Row row = sheet.createRow(0);
-            List<String> header = Lists.newArrayListWithCapacity(data.size());
-            for (Pair<String, String> item : data)
-                header.add(item.getValue());
-            ExcelHelper.writeHeader(header, row, creationHelper, cellStyle);
+    public static <T extends ReadUploadExcel<R>, R> R readUploadExcel(T t, InputStream inputStream) {
+        try (Workbook workbook = WorkbookFactory.create(inputStream)) {
+            return (R) t.readFile(workbook);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-
-        @Override
-        public void writeBody(List<Pair<String, String>> header, List<Map<String, String>> data, int curRowNum, Sheet sheet, CellStyle cellStyle, CreationHelper creationHelper) {
-            List<String> tmpHeaders = Lists.newArrayListWithCapacity(data.size());
-            for (Pair<String, String> item : header)
-                tmpHeaders.add(item.getValue());
-            ExcelHelper.writeBody(data, tmpHeaders, curRowNum, sheet, creationHelper, cellStyle);
-        }
+        throw new InvalidParameterException("read excel error");
     }
 }

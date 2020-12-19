@@ -18,13 +18,14 @@ dependencies {
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher:1.+'
     testCompile "org.mockito:mockito-core:2.+"
     implementation 'cglib:cglib:3.+'
-    implementation 'com.google.guava:guava:29.+'
+    implementation 'com.google.guava:guava:30.+'
     implementation 'org.apache.logging.log4j:log4j-core:2.+'
     implementation 'org.apache.logging.log4j:log4j-slf4j18-impl:2.+'
-    implementation 'org.slf4j:slf4j-api:1.+'
+    implementation  'org.slf4j:slf4j-api:2.0.0-alpha1'
     implementation 'com.google.protobuf:protobuf-java:3.+'
     implementation 'org.apache.poi:poi:4.+'
     implementation 'org.apache.poi:poi-ooxml:4.+'
+    implementation 'org.apache.commons:commons-csv:1.+'
     implementation "com.squareup.okhttp3:okhttp:4.+"
     implementation "com.squareup.okhttp3:logging-interceptor:4.+"
     implementation 'commons-codec:commons-codec:1.+'

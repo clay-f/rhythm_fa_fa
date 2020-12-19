@@ -9,7 +9,9 @@ import org.apache.poi.ss.usermodel.Sheet;
 import java.util.List;
 
 /**
- * 将所有数据写入excel。不写入表头
+ * 将所有数据写入excel。不写入表头。
+ * <p>
+ * created by f at 2020-12-19 20:02
  */
 public class DownloadExcelWriteListImpl implements DownloadExcelWriteList<List<String>> {
     @Override

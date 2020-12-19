@@ -7,7 +7,7 @@ import java.util.stream.Collector;
 
 
 public class ListCollector {
- /**
+    /**
      * 经过优化过的，插入排序，在使用stream的时候，创建排序过的list.
      * <p>
      * jdk 没有在collector中提供创建排序了的list.

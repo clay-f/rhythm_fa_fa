@@ -19,10 +19,16 @@ import static java.util.Objects.requireNonNull;
 /**
  * 读写excel。提供了两种类型的方法1:读写文件 2:上传下载文件
  * <p>
+ * 直接读写文件，调用静态方法。上传下载文件，需要额外使用对应的类
+ * <p>
  * created by f at 2020-12-19 13:34
  */
 public class ExcelHelper {
+    /**
+     * 写入文件使用默认字体。
+     */
     public static final String DEFAULT_FONT = "Mac OS X".equals(System.getProperty("os.name")) ? "SFNSMono" : "Microsoft YaHei UI";
+    public static final int DEFAULT_FONT_SIZE = 12;
 
     /**
      * 读取excel文件，返回 list.
@@ -181,7 +187,7 @@ public class ExcelHelper {
     private static CellStyle getCellStyleConfig(Workbook workbook) {
         Font font = workbook.createFont();
         font.setFontName(DEFAULT_FONT);
-        font.setFontHeightInPoints((short) 12);
+        font.setFontHeightInPoints((short) DEFAULT_FONT_SIZE);
         CellStyle cellStyle = workbook.createCellStyle();
         cellStyle.setFont(font);
         return cellStyle;
@@ -269,15 +275,17 @@ public class ExcelHelper {
      *
      * </pre>
      *
-     * @param t        向excel写数据实现类
+     * @param t        写数据实现类对象
      * @param headers  表头
-     * @param data     被写入的数据
+     * @param data     表内容
      * @param response response
      * @param <T>      实现类类型
      * @param <H>      表头类型
-     * @param <D>      内容类型
+     * @param <D>      表内容类型
      */
     public static <T extends DownloadExcel, H, D> void writeDownloadExcel(T t, List<H> headers, List<D> data, HttpServletResponse response) {
+        Objects.requireNonNull(t);
+        Objects.requireNonNull(data);
         Workbook workbook = new XSSFWorkbook();
         CellStyle cellStyle = getCellStyleConfig(workbook);
         CreationHelper creationHelper = workbook.getCreationHelper();
@@ -308,9 +316,11 @@ public class ExcelHelper {
      * @param inputStream 输入流
      * @param <T>         读取文件类型
      * @param <R>         返回值类型
-     * @return R
+     * @return R 返回值
      */
     public static <T extends ReadUploadExcel<R>, R> R readUploadExcel(T t, InputStream inputStream) {
+        Objects.requireNonNull(inputStream);
+        Objects.requireNonNull(t);
         try (Workbook workbook = WorkbookFactory.create(inputStream)) {
             return (R) t.readFile(workbook);
         } catch (IOException e) {

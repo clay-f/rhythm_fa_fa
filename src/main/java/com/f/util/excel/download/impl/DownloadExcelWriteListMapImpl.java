@@ -19,6 +19,8 @@ import java.util.Map;
  * <p>
  * <p>
  * Pair left为key，用于从data获取数据，value用于写入excel作为表头
+ * <p>
+ * created by f at 2020-12-19 20:02
  */
 public class DownloadExcelWriteListMapImpl implements DownloadExcelWriteListMap<Pair<String, String>, Map<String, String>> {
     @Override

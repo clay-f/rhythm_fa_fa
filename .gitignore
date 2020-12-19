@@ -3,4 +3,4 @@ out/
 .idea/
 build/
 src/test/java/com/f/foo
-
+logs/

@@ -36,4 +36,5 @@ dependencies {
     implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.+'
     implementation 'io.netty:netty-all:4.+'
     implementation 'org.apache.commons:commons-lang3:3.+'
+    implementation 'org.apache.tomcat:tomcat-servlet-api:10.0.0'
 }

@@ -255,18 +255,30 @@ public class ExcelHelper {
     /**
      * 下载文件。
      * <p>
-     * 使用方法，首先确定要写入的数据类型是什么，然后初始化写Excel的类，表头可以自定义
-     *
+     * 使用方法，首先确定要写入的数据结构是什么，然后查看已有实现是否能够满足要求，
+     * <ol>
+     *     目前有两种实现
+     *     <li>
+     *         {@link DownloadExcelWriteListImpl 单纯写list}。就是将所有list写入表格
+     *     </li>
+     *     <li>{@link DownloadExcelWriteListMapImpl 带表头写入list}。写入表头，再写入具体内容</li>
+     * </ol>
+     * <p>
+     * 若能满足要求，直接使用默认的就行。若导出的数据结构当前实现不能满足要求，可实现{@link DownloadExcelWriteList 写入list} 或 {@link DownloadExcelWriteListMap 带表头的list}，手动写入数据。
+     * <br/>
+     * 使用示例:
+     * <br/>
+     * 首先确认要用哪种实现类，写入数据，然后调用静态方法就行
      * <pre>
      * {@code
      *
-     *  // 初始化写入数据实例
+     *  // 初始化写入数据实例，用于写入数据的实现类。
      *  WriteServletRequestExcelWithKeyAsHeaderImpl t = new WriteServletRequestExcelWithKeyAsHeaderImpl();
      *
      *  // service 获取要写入的数据
      *  List<Map<String, String>> data = service.getData();
      *
-     *  // 从第一个data获取表头
+     *  // 从第一个data获取表头。表头通常是从数据里面得到的，所以这里取第一条数据的属性作为表头。表头也可以自定义，自定义表头，自定义导出结果
      *  List<String> header = getHeader(data.get(0));
      *
      *  //写入数据并下载

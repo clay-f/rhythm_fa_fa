@@ -164,9 +164,9 @@ public class ExcelHelper {
      * <p>
      * 写数据的时候，使用header 作为key取数据 map 里面的值，头部可以自定义
      *
-     * @param data
+     * @param data 要写入的数据
      * @param header excel header，头部可以自定义
-     * @param file
+     * @param file 输入文件
      */
     public static void writeExcelWithHeader(List<Map<String, String>> data, List<String> header, File file) {
         requireNonNull(data);
@@ -259,9 +259,9 @@ public class ExcelHelper {
      * <ol>
      *     目前有两种实现
      *     <li>
-     *         {@link DownloadExcelWriteListImpl 单纯写list}。就是将所有list写入表格
+     *         {@link com.f.util.excel.download.impl.DownloadExcelWriteListImpl 单纯写list}。就是将所有list写入表格
      *     </li>
-     *     <li>{@link DownloadExcelWriteListMapImpl 带表头写入list}。写入表头，再写入具体内容</li>
+     *     <li>{@link com.f.util.excel.download.impl.DownloadExcelWriteListImpl 带表头写入list}。写入表头，再写入具体内容</li>
      * </ol>
      * <p>
      * 若能满足要求，直接使用默认的就行。若导出的数据结构当前实现不能满足要求，可实现{@link DownloadExcelWriteList 写入list} 或 {@link DownloadExcelWriteListMap 带表头的list}，手动写入数据。

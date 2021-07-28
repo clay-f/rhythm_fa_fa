@@ -1,11 +1,12 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+
     <groupId>com.f</groupId>
     <artifactId>rhythm</artifactId>
     <version>1.0</version>
-    <description>Masters Of Rhythm</description>
     <packaging>jar</packaging>
+
     <dependencies>
         <!--         test-->
         <dependency>
@@ -120,20 +121,20 @@
         </dependency>
     </dependencies>
     <properties>
-        <junit.version>[5.7.1,)</junit.version>
-        <mockito.version>3.8.0</mockito.version>
+        <junit.version>[5.7.2,)</junit.version>
+        <mockito.version>3.11.2</mockito.version>
         <cglib.version>[3.3.0,)</cglib.version>
-        <guava.version>[30.1-jre,)</guava.version>
-        <log4j2.version>[2.14.0,)</log4j2.version>
+        <guava.version>[30.1.1-jre,)</guava.version>
+        <log4j2.version>[2.14.1,)</log4j2.version>
         <slf4j.version>[2.0.0-alpha1,)</slf4j.version>
         <poi.version>[5.0.0,)</poi.version>
         <okhttp.version>4.9.1</okhttp.version>
-        <jackson.version>[2.12.2]</jackson.version>
-        <netty.version>[4.1.63.Final]</netty.version>
+        <jackson.version>[2.12.4]</jackson.version>
+        <netty.version>[4.1.66.Final]</netty.version>
         <commons-lang.version>[3.12.0]</commons-lang.version>
         <commons-codec.version>1.15</commons-codec.version>
-        <tomcat.version>10.0.4</tomcat.version>
-        <protobuf.version>3.15.5</protobuf.version>
+        <tomcat.version>10.0.8</tomcat.version>
+        <protobuf.version>3.17.3</protobuf.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <maven.compiler.source>11</maven.compiler.source>
@@ -157,4 +158,20 @@
             </plugin>
         </plugins>
     </build>
+
+    <name>rhythm</name>
+    <description>rhythm of master</description>
+    <url>https://github.com/clay-f/rhythm_fa_fa</url>
+    <licenses>
+        <license>
+            <name>The Apache Software License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+        </license>
+    </licenses>
+    <developers>
+        <developer>
+            <name>f</name>
+            <email>839322915@qq.com</email>
+        </developer>
+    </developers>
 </project>

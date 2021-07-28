@@ -1,4 +1,4 @@
-package com.f.test.tmp;
+package com.f.util;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
